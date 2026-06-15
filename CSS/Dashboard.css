@@ -1,0 +1,112 @@
+.cards { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  margin-left: 0;
+  transition: all 1s ease;
+}
+
+.card { 
+  width: 310px;
+  height: 115px;
+  margin-bottom: 30px;;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  background-color: var(--table-content-bg-light);
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transform: translateX(0);
+  transition: margin 1s ease, transform 1s ease;
+}
+
+body.dark .card { 
+  border: 2px solid var(--border-dark);
+  background-color: var(--table-content-bg-dark);
+  box-sizing: border-box;
+}
+
+.card p,
+.card h2 { 
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.card p {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.card h2 {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.section-buttons {  /*Componente Dashboard*/
+  display: flex;
+  margin-left: 40px;
+  justify-content: left;
+}
+
+.section-buttons button { /*Componente Dashboard*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  border: 1px, groove, var(--border-light-alternative);
+  border-radius: 10px;
+}
+
+.section-buttons button:nth-child(2) { /*Componente Dashboard*/
+  color: var(--text-light);
+  background-color: var(--secundary);
+  border: 1px, groove, var(--border-light-alternative);
+  border-radius: 10px;
+}
+
+.section-buttons button:nth-child(3) { /*Componente Dashboard*/
+  color: var(--text-light);
+  background-color: var(--terciary);
+  border: 1px, groove, var(--border-light-alternative);
+  border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+  .cards {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin-left: 0;
+  }
+
+  .recogido .cards {
+    margin-left: 0;
+    transform: none;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-height: 115px;
+    margin-bottom: 0;
+  }
+
+  .card h1 {
+    word-break: break-word;
+  }
+
+  .section-buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 15px;
+  }
+
+  .section-buttons button {
+    margin-right: 0;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}

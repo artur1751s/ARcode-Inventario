@@ -1,0 +1,98 @@
+<h1>Clientes</h1>
+
+<section>
+    <div class="search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        <input class="search-input" id="search-clients" type="text" placeholder="">
+        <label for="search-clients">Buscar Clientes</label>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <caption>Listado de clientes registrados</caption>
+            <thead>
+                <tr>
+                    <th>ID CLIENTE</th>
+                    <th>NOMBRE</tg>
+                    <th>CORREO</th>
+                    <th>TELEFONO</th>
+                    <th>DIRECCION</th>
+                    <th>ESTADO</th>
+                    <th>ACCION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Laura Gómez</td>
+                    <td>laura.gomez@gmail.com</td>
+                    <td>3204567812</td>
+                    <td>Medellín cra 45 #12-30</td>
+                    <td class="state-enable">ACTIVO</td>
+                    <td>
+                        <div class="actions">
+                            <button class="edit" aria-label="Editar Cliente"></button>
+                            <button class="user-disable" aria-label="Habilitar Cliente"></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Daniel Rojas</td>
+                    <td>danielr@hotmail.com</td>
+                    <td>3118754321</td>
+                    <td>Bogotá calle 80 #25-18</td>
+                    <td class="state-disable">SUSPENDIDO</td>
+                    <td>
+                        <div class="actions">
+                            <button class="edit" aria-label="Editar Cliente"></button>
+                            <button class="user-enable" aria-label="Deshabilitar Cliente"></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Sofía Martínez</td>
+                    <td>sofia.martinez@gmail.com</td>
+                    <td>3159987410</td>
+                    <td>Cali av 6 norte #40-22</td>
+                    <td class="state-enable">ACTIVO</td>
+                    <td>
+                        <div class="actions">
+                            <button class="edit" aria-label="Editar Cliente"></button>
+                            <button class="user-disable" aria-label="Deshabilitar Cliente"></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Juan Esteban Pérez Caballero Sacro</td>
+                    <td>juaneperez@yahoo.com</td>
+                    <td>3186549871</td>
+                    <td>Bucaramanga calle 33 #18-90</td>
+                    <td class="state-disable">SUSPENDIDO</td>
+                    <td>
+                        <div class="actions">
+                            <button class="edit" aria-label="Editar Cliente"></button>
+                            <button class="user-enable" aria-label="Habilitar Cliente"></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Camila Torres</td>
+                    <td>camila.torres@gmail.com</td>
+                    <td>3007412589</td>
+                    <td>Pereira cra 10 #14-67</td>
+                    <td class="state-enable">ACTIVO</td>
+                    <td>
+                        <div class="actions">
+                            <button class="edit" aria-label="Editar Cliente"></button>
+                            <button class="user-disable" aria-label="Deshabilitar Cliente"></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
