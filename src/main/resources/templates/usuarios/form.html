@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Usuario</title>
+</head>
+<body>
+    <h1 th:text="${usuarios.id_usuario == null} ? 'Registrar Usuario' : 'Editar Usuario'"> Formulario Usuario</h1>
+
+    <hr>
+
+    <form th:action="@{/view/usuarios/save}" th:object="${usuarios}" method="post">
+        <input type="hidden" th:field="*{id_usuario}">
+
+        <table>
+            <tr>
+                <td><label>Nombre:</label></td>
+                <td>
+                    <input type="text" th:field="*{nombre}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Correo:</label></td>
+                <td>
+                    <input type="email" th:field="*{correo}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Telefono:</label></td>
+                <td>
+                    <input type="number" th:field="*{telefono}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Identificacion:</label></td>
+                <td>
+                    <input type="number" th:field="*{identificacion}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Contraseña:</label></td>
+                <td>
+                    <input type="password" th:field="*{contrasena}">
+
+                    <span th:if="${usuarios.id_usuario != null}">
+                        (dejar vacio para conservar la contraseña actual)
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Rol:</label></td>
+                <td>
+                    <input type="text" th:field="*{rol}" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Guardar</button>
+
+                    <a th:href="@{/view/usuarios}">Volver</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

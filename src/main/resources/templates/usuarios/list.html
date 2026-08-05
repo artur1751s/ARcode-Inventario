@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de usuarios</title>
+</head>
+<body>
+    <h1>Gestion de usuarios</h1>
+    <div th:if="${succes}">
+        <p th:text="${succes}"></p>
+    </div>
+
+    <hr>
+
+    <a th:href="@{/view/usuarios/form}">Registrar Usuario</a>
+
+    <hr>
+
+    <h2>Lista de usuarios Registrados</h2>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>ID usuario</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Identificacion</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+
+        <tbody th:each="usuario : ${usuarios}">
+            <td>
+                <a th:href="@{'/view/usuarios/update/'}+${usuario.id_usuario}">Editar</a>
+
+                <form th:action="@{'/view/usuarios/delete/'+${usuario.id_usuario}}" method="post">
+
+                    <button type="submit">Eliminar</button>
+                </form>
+            </td>
+
+            <td th:text="${usuario.id_usuario}"></td>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.correo}"></td>
+            <td th:text="${usuario.telefono}"></td>
+            <td th:text="${usuario.identificacion}"></td>
+            <td th:text="${usuario.rol}"></td>
+        </tbody>
+    </table>
+</body>
+</html>

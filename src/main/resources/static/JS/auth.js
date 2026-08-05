@@ -11,7 +11,7 @@ if (formLogin) {
       alert('Por favor complete el correo y la contraseña.');
     } else {
       alert('Inicio de sesión correcto.');
-      window.location.href = 'Main.html';
+      window.location.href = '/src/main/resources/templates/Components/main.html';
     }
   });
 }
@@ -32,7 +32,7 @@ if (formCliente) {
       alert('Todos los campos son obligatorios.');
     } else {
       alert('Cliente guardado correctamente.');
-      window.location.href = 'Login.html';
+      window.location.href = 'login.html';
     }
   });
 }
