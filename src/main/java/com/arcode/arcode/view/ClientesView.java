@@ -33,7 +33,7 @@ public class ClientesView {
     public String save(@ModelAttribute Clientes clientes, RedirectAttributes ra) {
         clientesRepository.save(clientes);
         ra.addAttribute("message", "Cliente creado con exito");
-        return "/components/main";
+        return "redirect:/main";
     }
 
     @GetMapping("/clientes/update/{id}")
