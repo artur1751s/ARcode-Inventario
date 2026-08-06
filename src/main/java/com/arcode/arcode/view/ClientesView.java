@@ -29,6 +29,11 @@ public class ClientesView {
         return "auth/register";
     }
 
+    @GetMapping("/clientes/login")
+    public String main() {
+        return "/auth/login";
+    }
+
     @PostMapping("/clientes/save")
     public String save(@ModelAttribute Clientes clientes, RedirectAttributes ra) {
         clientesRepository.save(clientes);

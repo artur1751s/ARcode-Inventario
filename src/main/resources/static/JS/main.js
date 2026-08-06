@@ -2,14 +2,11 @@ const main = document.querySelector("main");
 console.log("main.js cargado")
 //Carga inicial de la pagina, comprueba el ultimo estado y lo carga
 window.addEventListener('load', () => {
-    // localStorage.getItem("section") != undefined ?
-    //     cargarSeccion(localStorage.getItem("section")) :
-    //     cargarSeccion("/component/dashboard");
     let ruta = window.location.pathname.split("/").pop();
     if (ruta === "main") {
         ruta = "dashboard";
     }
-    cargarSeccion("/component/"+ruta,false)
+    cargarSeccion("/component/"+ruta)
     moverSelector(localStorage.getItem("btnTop"));
 });
 
@@ -29,10 +26,8 @@ function cargarSeccion(url, CambiarUrl = true) {
     .then(data => data.text())
     .then(html => {
         main.innerHTML = html;
-    if (CambiarUrl) {
         const ruta = url.split("/").pop();
         history.pushState({}, "", "/main/" + ruta);
-    }
     });
 }
 
@@ -65,7 +60,7 @@ navButtons.forEach(navButton => {
 //botón logout
 const logout = document.getElementById("logout");
 logout.addEventListener('click', () => {
-    window.location.href = 'Login.html';
+    window.location.href = '/clientes/login';
 });
 
 //Funcionalidad del boton del modo oscuro
