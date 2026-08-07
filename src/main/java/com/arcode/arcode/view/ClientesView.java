@@ -17,7 +17,8 @@ public class ClientesView {
     @Autowired
     private ClientesRepository clientesRepository;
 
-    @GetMapping("/clientes")
+    //TODO: correcgir la ruta /main/th/clients a /main/clientes quitando las rutas relativas de ComponentView
+    @GetMapping("/main/th/clientes")
     public String lista(Model model) {
         model.addAttribute("clientes", clientesRepository.findAll());
         return "components/clientes";
@@ -41,7 +42,7 @@ public class ClientesView {
         return "redirect:/main";
     }
 
-    @GetMapping("/clientes/update/{id}")
+    @GetMapping("/main/clientes/update/{id}")
     public String update(@PathVariable Long id, Model model) {
         Clientes clientes = clientesRepository.findById(id).orElse(null);
         model.addAttribute("clientes", clientes);
@@ -52,6 +53,6 @@ public class ClientesView {
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         clientesRepository.deleteById(id);
         ra.addAttribute("message", "Cliente eliminado con exito");
-        return "redirect:/clientes";
+        return "redirect:/main/th/clientes";
     }
 }

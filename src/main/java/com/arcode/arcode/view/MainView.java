@@ -17,4 +17,6 @@ public class MainView {
     public String ruta(@PathVariable String ruta) {
         return "components/main";
     }
+
+    
 }
