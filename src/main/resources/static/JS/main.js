@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     if (ruta === "main") {
         ruta = "dashboard";
     }
-    cargarSeccion("/main/th/"+ruta)
+    cargarSeccion("/main/module/"+ruta)
     moverSelector(localStorage.getItem("btnTop"));
 });
 

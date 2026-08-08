@@ -16,14 +16,13 @@ import com.arcode.arcode.repository.PedidosRepository;
 public class PedidosView {
     @Autowired
     private PedidosRepository pedidosRepository;
-
-    //TODO: correcgir la ruta /main/th/pedidos a /main/pedidos quitando las rutas relativas de ComponentView
-    @GetMapping("/main/th/pedidos")
+    @GetMapping("/main/module/pedidos")
     public String lista(Model model) {
         model.addAttribute("pedidos", pedidosRepository.findAll());
         return "components/pedidos";
     }
 
+    //TODO: Realizar el modal del registro de pedidos e ingresar la ruta
     // @GetMapping("/clientes/register")
     // public String form(Model model) {
     //     model.addAttribute("clientes", new Clientes());

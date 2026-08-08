@@ -16,9 +16,7 @@ import com.arcode.arcode.repository.ProductosRepository;
 public class ProductosView {
     @Autowired
     private ProductosRepository productosRepository;
-
-    //TODO: correcgir la ruta /main/th/clients a /main/clientes quitando las rutas relativas de ComponentView
-    @GetMapping("/main/th/inventario")
+    @GetMapping("/main/module/inventario")
     public String lista(Model model) {
         model.addAttribute("productos", productosRepository.findAll());
         return "components/inventario";

@@ -16,14 +16,13 @@ import com.arcode.arcode.repository.ProveedoresRepository;
 public class ProveedoresView {
     @Autowired
     private ProveedoresRepository proveedoresRepository;
-
-    //TODO: correcgir la ruta /main/th/proveedores a /main/proveedores quitando las rutas relativas de ComponentView
-    @GetMapping("/main/th/proveedores")
+    @GetMapping("/main/module/proveedores")
     public String lista(Model model) {
         model.addAttribute("proveedores", proveedoresRepository.findAll());
         return "components/proveedores";
     }
 
+    //TODO: Realizar el modal del registro de proveedores e ingresar la ruta
     // @GetMapping("/clientes/register")
     // public String form(Model model) {
     //     model.addAttribute("clientes", new Clientes());
