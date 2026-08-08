@@ -18,6 +18,7 @@
             <caption>Listado de productos registrados</caption>
             <thead>
                 <tr>
+                    <th>ID PRODUCTO</td>
                     <th>PRODUCTO</td>
                     <th>CATEGORIA</th>
                     <th>STOCK</th>
@@ -27,120 +28,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Café Premium 500g</td>
-                    <td>Producto Terminado</td>
-                    <td>15</td>
-                    <td>28.000</td>
-                    <td>420.000</td>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id_producto}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.categoria}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td th:text="${#numbers.formatDecimal(producto.precio, 0, 'POINT', 2, 'COMMA')}"></td>
+                    <td th:text="${#numbers.formatDecimal(producto.precio * producto.stock, 0, 'POINT', 2, 'COMMA')}"></td>
                     <td>
                         <div class="actions">
                             <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Café Verde</td>
-                    <td>Materia Prima</td>
-                    <td>40</td>
-                    <td>18.000</td>
-                    <td>720.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bolsa de Café 1kg</td>
-                    <td>Presentación Comercial</td>
-                    <td>20</td>
-                    <td>42.000</td>
-                    <td>840.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Café en Cereza</td>
-                    <td>Materia Prima</td>
-                    <td>60</td>
-                    <td>7.500</td>
-                    <td>450.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Café Gourmet</td>
-                    <td>Producto Terminado</td>
-                    <td>10</td>
-                    <td>35.000</td>
-                    <td>350.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Frasco de Café Instantáneo</td>
-                    <td>Presentación Comercial</td>
-                    <td>25</td>
-                    <td>19.000</td>
-                    <td>475.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Café Molido</td>
-                    <td>Materia Prima</td>
-                    <td>30</td>
-                    <td>16.000</td>
-                    <td>480.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Caja de Cápsulas</td>
-                    <td>Presentación Comercial</td>
-                    <td>18</td>
-                    <td>32.000</td>
-                    <td>576.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Café Orgánico</td>
-                    <td>Producto Terminado</td>
-                    <td>12</td>
-                    <td>30.000</td>
-                    <td>360.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Producto"></button>
-                            <button class="delete" aria-label="Eliminar Producto"></button>
+                            <form th:action="@{'/productos/delete/'+${producto.id_producto}}" method="post">
+                                <button class="delete" aria-label="Eliminar Producto"></button>
+                            </form>
                         </div>
                     </td>
                 </tr>

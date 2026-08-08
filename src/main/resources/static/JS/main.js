@@ -86,34 +86,3 @@ document.addEventListener('input', (e) => {
         });
     }
 });
-
-main.addEventListener('click', (e) => {
-    const element = e.target;
-    const state = element.closest("td")?.previousElementSibling;
-    if (!state) return;
-    switch (element) {
-        case element.closest("table .delete"):
-            if (confirm(`¿Estas seguro de que quieres borrar este elemento?`)) {
-                element.closest("tr").remove();
-            }
-            break;
-            
-        case element.closest("table .user-disable"):
-            element.classList.add("user-enable");
-            element.classList.remove("user-disable");
-            element.setAttribute("aria-label", "Habilitar Cliente");
-            state.textContent = "SUSPENDIDO";
-            state.classList.add("state-disable");
-            state.classList.remove("state-enable");
-            break;
-            
-        case element.closest("table .user-enable"):
-            element.classList.add("user-disable");
-            element.classList.remove("user-enable");
-            element.setAttribute("aria-label", "Deshabilitar Cliente");
-            state.textContent = "ACTIVO";
-            state.classList.add("state-enable");
-            state.classList.remove("state-disable");
-            break;
-    }
-});
