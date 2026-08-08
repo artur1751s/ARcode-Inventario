@@ -27,55 +27,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Juan Caisara</td>
-                    <td>Cafe Nestle</td>
-                    <td>3129485732</td>
-                    <td class="state-enable">ACTIVO</td>
+                <tr th:each="proveedor : ${proveedores}">
+                    <td th:text="${proveedor.id_proveedor}"></td>
+                    <td th:text="${proveedor.nombre}"></td>
+                    <td th:text="${proveedor.empresa}"></td>
+                    <td th:text="${proveedor.telefono}"></td>
+                    <td th:text="${proveedor.estado}"></td>
                     <td>
                         <div class="actions">
                             <button class="edit" aria-label="Editar Proveedor"></button>
-                            <button class="user-disable" aria-label="Deshabilitar Proveedor"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jorge Tellez</td>
-                    <td>Juan Valdez</td>
-                    <td>3428769504</td>
-                    <td class="state-enable">ACTIVO</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Proveedor"></button>
-                            <button class="user-disable" aria-label="Deshabilitar Proveedor"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Hilda Lopez</td>
-                    <td>Nescafé</td>
-                    <td>3543245678</td>
-                    <td class="state-enable">ACTIVO</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Proveedor"></button>
-                            <button class="user-disable" aria-label="Deshabilitar Proveedor"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Arturo Tellez</td>
-                    <td>Águila Roja</td>
-                    <td>3114567843</td>
-                    <td class="state-disable">SUSPENDIDO</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Proveedor"></button>
-                            <button class="user-enable" aria-label="Habilitar Proveedor"></button>
+                            <form th:action="@{'/proveedor/delete/'+${proveedor.id_proveedor}}" method="post">
+                                <button class="user-disable" aria-label="Deshabilitar Proveedor"></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
