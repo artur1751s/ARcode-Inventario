@@ -33,5 +33,5 @@ public class Clientes {
     private Integer identificacion;
     @NotBlank(message = "!Debes de ingresar tu direccion de residencia!")
     private String direccion;
-    private Long rol;
+    private Long rol; //llave foranea del rol
 }

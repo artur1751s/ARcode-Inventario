@@ -1,3 +1,5 @@
+window.onbeforeunload = () => "¿Estás seguro de salir?";
+
 const formLogin = document.getElementById('form-login');
 
 if (formLogin) {

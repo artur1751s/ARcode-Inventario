@@ -19,31 +19,31 @@ import com.arcode.arcode.repository.ProductosRepository;
 @RequestMapping("/api/productos")
 public class ProductosController {
     @Autowired
-    private ProductosRepository ProductosRepository;
+    private ProductosRepository productosRepository;
 
     @GetMapping
     public List<Productos> getAll() {
-        return ProductosRepository.findAll();
+        return productosRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Productos getById(@PathVariable Long id) {
-        return ProductosRepository.findById(id).orElse(null);
+        return productosRepository.findById(id).orElse(null);
     }
 
     @PostMapping
     public Productos create(@RequestBody Productos productos) {
-        return ProductosRepository.save(productos);
+        return productosRepository.save(productos);
     }
 
     @PutMapping("/{id}")
     public Productos update(@PathVariable Long id, @RequestBody Productos productos) {
         productos.setId_producto(id);
-        return ProductosRepository.save(productos);
+        return productosRepository.save(productos);
     }
     
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        ProductosRepository.deleteById(id);
+        productosRepository.deleteById(id);
     }
 }

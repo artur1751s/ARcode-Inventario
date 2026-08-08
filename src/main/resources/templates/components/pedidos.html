@@ -27,55 +27,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Laura Gomez</td>
-                    <td>22-04-2025</td>
-                    <td>Entregado</td>
-                    <td>$5.000</td>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id_pedido}"></td>
+                    <td th:text="${pedido.id_cliente}"></td>
+                    <td th:text="${pedido.fecha}"></td>
+                    <td th:text="${pedido.estado_pedido}"></td>
+                    <td>Funcion en progreso</td>
                     <td>
                         <div class="actions">
                             <button class="edit" aria-label="Editar Pedido"></button>
-                            <button class="delete" aria-label="Eliminar Pedido"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Sofía Martínez</td>
-                    <td>15-06-2026</td>
-                    <td>Pendiente</td>
-                    <td>$25.650</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Pedido"></button>
-                            <button class="delete" aria-label="Eliminar Pedido"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Camila Torres</td>
-                    <td>10-01-2026</td>
-                    <td>Cancelado</td>
-                    <td>$8.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Pedido"></button>
-                            <button class="delete" aria-label="Eliminar Pedido"></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Camila Torres</td>
-                    <td>17-08-2026</td>
-                    <td>Pendiente</td>
-                    <td>$9.000</td>
-                    <td>
-                        <div class="actions">
-                            <button class="edit" aria-label="Editar Pedido"></button>
-                            <button class="delete" aria-label="Eliminar Pedido"></button>
+                            <form th:action="@{'/pedidos/delete/'+${pedido.id_pedido}}" method="post">
+                                <button class="delete" aria-label="Eliminar Pedido"></button>
+                            </form>
                         </div>
                     </td>
                 </tr>
