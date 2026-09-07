@@ -7,7 +7,20 @@ window.addEventListener('load', () => {
         ruta = "dashboard";
     }
     cargarSeccion("/main/module/"+ruta)
-    moverSelector(localStorage.getItem("btnTop"));
+
+    let buttons = document.querySelectorAll("aside nav button");
+    buttons.forEach(button => {
+        let section = button.dataset.url.split("/").pop()
+        if (ruta.toLowerCase() == section.toLowerCase()) {
+            moverSelector(button.offsetTop)
+            console.log("son iguales")
+            console.log(button.offsetTop)
+        }
+        else {localStorage.getItem("btnTop")
+        console.log(section.toLowerCase())
+        console.log(ruta.toLowerCase())
+        console.log("no son iguales")}
+    });
 });
 
 //Funcionalidad del boton para ocultar y mostrar el menu lateral
@@ -34,6 +47,8 @@ function cargarSeccion(url, CambiarUrl = true) {
 //Funcion para mover el selector de seleccion de seccion del menu lateral
 function moverSelector(btn) {
   const selector = document.querySelector('.selector');
+  console.log("selector:", selector);
+  console.log("posición recibida:", btn);
   selector.style.transform = `translateY(${btn}px)`;
 }
 //Funcionalidad de los botones laterales
