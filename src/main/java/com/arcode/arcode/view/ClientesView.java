@@ -35,6 +35,7 @@ public class ClientesView {
 
     @PostMapping("/clientes/save")
     public String save(@ModelAttribute Clientes clientes, RedirectAttributes ra) {
+        clientes.setEstado("ACTIVO");
         clientesRepository.save(clientes);
         ra.addAttribute("message", "Cliente creado con exito");
         return "redirect:/main";

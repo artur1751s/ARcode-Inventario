@@ -17,8 +17,6 @@
             <h2>Crear Cuenta</h2>
             
             <form id="form-cliente" class="form-grid" th:action="@{/clientes/save}" th:object="${clientes}" method="post">
-                <input type="hidden" thfield="*{id_cliente}">
-
                 <div class="form-group full">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre completo" required>

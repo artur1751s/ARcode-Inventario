@@ -38,8 +38,26 @@ public class ClientesController {
 
     @PutMapping("/{id}")
     public Clientes update(@PathVariable Long id, @RequestBody Clientes clientes) {
-        clientes.setId_cliente(id);
-        return clientesRepository.save(clientes);
+        return clientesRepository.findById(id).map(cliente -> {
+            cliente.setNombre(clientes.getNombre());
+            cliente.setIdentificacion(clientes.getIdentificacion());
+            cliente.setCorreo(clientes.getCorreo());
+            cliente.setTelefono(clientes.getTelefono());
+            cliente.setDireccion(clientes.getDireccion());
+            
+            return clientesRepository.save(cliente);
+        })
+        .orElse(null);
+    }
+
+    @PutMapping("/{id}/estado")
+    public Clientes actualizarEstado(@PathVariable Long id, @RequestBody String estado) {
+        return clientesRepository.findById(id).map(cliente -> {
+            cliente.setEstado(estado);
+            
+            return clientesRepository.save(cliente);
+        })
+        .orElse(null);
     }
     
     @DeleteMapping("/{id}")

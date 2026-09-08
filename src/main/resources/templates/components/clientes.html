@@ -30,17 +30,61 @@
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.telefono}"></td>
                     <td th:text="${cliente.direccion}"></td>
-                    <td>Funcion en progreso</td>
+                    <td th:text="${cliente.estado}" th:style="${cliente.estado == 'SUSPENDIDO'} ? 'color: red;' : 'color: green;'"></td>
                     <td>
                         <div class="actions">
-                            <button class="edit" aria-label="Editar Cliente"></button>
-                            <form th:action="@{'/clientes/delete/'+${cliente.id_cliente}}" method="post">
-                                <button class="user-disable" aria-label="Habilitar Cliente"></button>
-                            </form>
+                            <button
+                                class="edit btn-editar"
+                                th:data-id="${cliente.id_cliente}"
+                                aria-label="Editar Cliente">
+                            </button>
+                            <button
+                                th:class="${cliente.estado == 'SUSPENDIDO'} ? 'user-enable' : 'user-disable'"
+                                th:data-id="${cliente.id_cliente}"
+                                th:attr="aria-label=${cliente.estado == 'SUSPENDIDO'} ? 'Habilitar Cliente' : 'Deshabilitar Cliente'">
+                            </button>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div id="modal-clientes" class="modal">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h2>Editar cliente</h2>
+                <button id="btn-close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M18 6l-12 12" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="form-edit-clientes">
+                <input type="hidden" id="user-id">
+    
+                <labe for="edit-name">Nombre</label>
+                <input type="text" name="nombre" id="edit-name" required>
+                
+                <label for="edit-identification">Identificación</label>
+                <input type="number" name="identificacion" id="edit-identification" required>
+                
+                <label for="edit-email">Correo</label>
+                <input type="email" name="correo" id="edit-email" required>
+                
+                <label for="edit-number">Teléfono</label>
+                <input type="number" name="telefono" id="edit-number" required>
+    
+                <label for="edit-address">Direccion</label>
+                <input type="text" name="direccion" id="edit-address" required>
+                
+                <div class="modal-btns">
+                    <button type="submit" id="btn-save">Guardar cambios</button>
+                    <button type="button" id="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
