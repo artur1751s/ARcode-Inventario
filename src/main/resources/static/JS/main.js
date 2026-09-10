@@ -1,4 +1,7 @@
+console.log("main.js cargado✅");
+
 const main = document.querySelector("main");
+
 //Carga inicial de la pagina, comprueba el ultimo estado y lo carga
 window.addEventListener('load', () => {
     let ruta = window.location.pathname.split("/").pop();
@@ -6,17 +9,28 @@ window.addEventListener('load', () => {
     if (ruta === "main") {
         ruta = "dashboard";
     }
-
-    cargarSeccion("/main/module/"+ruta)
-
-    let buttons = document.querySelectorAll("aside nav button");
+    
+    cargarSeccion("/main/module/"+ruta);
+    
+    const buttons = document.querySelectorAll("aside nav button");
+    
     buttons.forEach(button => {
-        let section = button.dataset.url.split("/").pop()
+        button.classList.remove("selected");
+        
+        const section = button.dataset.url.split("/").pop();
 
-        if (ruta.toLowerCase() == section.toLowerCase()) {
-            moverSelector(button.offsetTop)
-        } else (localStorage.getItem("btnTop"));
+        if (ruta === section) {
+            moverSelector(button.offsetTop);
+            button.classList.add("selected");
+        }
     });
+    
+    const darkMode = document.getElementById("darkMode");
+
+    if (localStorage.getItem("darkMode") === "on") {
+        document.body.classList.add("dark");
+        darkMode.textContent = "☀️";
+    }
 });
 
 //Funcionalidad del boton para ocultar y mostrar el menu lateral
@@ -26,7 +40,7 @@ const aside = document.querySelector("aside");
 asideBtn.addEventListener('click', () => {
     aside.classList.toggle("disable");
     main.classList.toggle("recogido");
-    asideBtn.classList.toggle("recogido")
+    asideBtn.classList.toggle("recogido");
 });
 
 //Funcion para mostrar cada seccion dentro de main
@@ -40,22 +54,19 @@ function cargarSeccion(url, CambiarUrl = true) {
     });
 }
 
-//Funcion para mover el selector de seleccion de seccion del menu lateral
+//Funcion para mover el selector del menu lateral
 function moverSelector(btn) {
   const selector = document.querySelector('.selector');
+
   selector.style.transform = `translateY(${btn}px)`;
 }
 //Funcionalidad de los botones laterales
 const navButtons = document.querySelectorAll("aside nav button");
+
 navButtons.forEach(navButton => {
-    //Comprueba el localstorage para cargar estilo menu lateral
-    let url = navButton.dataset.url;
-
-    localStorage.getItem("section") != url ?
-        navButton.classList.remove("selected") :
-        navButton.classList.add("selected");
-
     //Carga seccion, borra el estilo de todos los botones y se lo añade al actual
+    const url = navButton.dataset.url;
+
     navButton.addEventListener('click', () => {
         cargarSeccion(url);
 
@@ -67,24 +78,30 @@ navButtons.forEach(navButton => {
 
         moverSelector(navButton.offsetTop);
 
-        localStorage.setItem("btnTop", navButton.offsetTop)
-        localStorage.setItem("section", url);
+        localStorage.setItem("btnTop", navButton.offsetTop);
     });
 });
 
 //botón logout
 const logout = document.getElementById("logout");
+
 logout.addEventListener('click', () => {
     window.location.href = '/clientes/login';
 });
 
 //Funcionalidad del boton del modo oscuro
 const darkMode = document.getElementById("darkMode");
-darkMode.addEventListener('click', () => {
-  document.body.classList.toggle("dark");
-  document.body.classList.contains("dark") ?
 
-  darkMode.textContent = "☀️" : darkMode.textContent = "🌙"
+darkMode.addEventListener('click', () => {
+    document.body.classList.toggle("dark");
+    
+    if (document.body.classList.contains("dark")) {
+        darkMode.textContent = "☀️";
+        localStorage.setItem("darkMode", "on");
+    } else {
+        darkMode.textContent = "🌙";
+        localStorage.setItem("darkMode", "off");
+    }
 });
 
 //Funcionalidad del buscador
@@ -104,4 +121,3 @@ document.addEventListener('input', (e) => {
         });
     }
 });
-console.log("main.js cargado✅")

@@ -1,3 +1,5 @@
+console.log("clientes.js cargado✅");
+
 document.addEventListener("click", (event) => {
     const botonEditar = event.target.closest(".btn-editar");
 
@@ -68,8 +70,8 @@ async function actualizarCliente(form) {
         }
 
         const clienteActualizado = await response.json();
-        console.log("Cliente actualizado:", clienteActualizado
-        );
+
+        console.log("Cliente actualizado:", clienteActualizado);
         cerrarModal();
         alert("Cliente actualizado correctamente");
     } catch (error) {
@@ -180,4 +182,3 @@ async function updUserEnable(id) {
         return false;
     }
 }
-console.log("clientes.js cargado✅");

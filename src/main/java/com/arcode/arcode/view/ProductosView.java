@@ -48,6 +48,6 @@ public class ProductosView {
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         productosRepository.deleteById(id);
         ra.addAttribute("message", "Producto eliminado con exito");
-        return "redirect:/main/th/inventario";
+        return "redirect:/main/module/inventario";
     }
 }
