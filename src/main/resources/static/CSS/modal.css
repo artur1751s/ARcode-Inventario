@@ -52,7 +52,7 @@ body.dark .modal-contenido {
     font-size: 22px;
 }
 
-#btn-close-modal {
+.btn-close-modal {
     border: 1px solid var(--terciary);
     color: var(--terciary);
     background: transparent;
@@ -94,6 +94,56 @@ body.dark .modal-contenido input:focus {
     border: 2px solid var(--secundary);
 }
 
+.modal-contenido select {
+    width: 100%;
+    height: 42px;
+    padding: 0 38px 0 12px;
+    margin-bottom: 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-light);
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 7px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url(../img/select-light.svg);
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 17px;
+}
+
+body.dark .modal-contenido select {
+    background-color: var(--table-content-bg-dark);
+    border: 2px solid var(--border-dark);
+    color: var(--text-dark);
+    background-image: url(../img/select-dark.svg);
+}
+
+.modal-contenido select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+body.dark .modal-contenido select:focus {
+    border-color: var(--secundary);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.modal-contenido select option {
+    padding: 10px;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+body.dark .modal-contenido select option {
+    background-color: var(--table-content-bg-dark);
+    color: var(--text-dark);
+}
+
 .modal-btns {
     display: flex;
     justify-content: center;
@@ -106,14 +156,13 @@ body.dark .modal-contenido input:focus {
     border: none;
     cursor: pointer;
     font-size: 14px;
-    
 }
 
-#btn-cancel {
+.btn-modal-cancel {
     color: var(--text-light);
     background-color: var(--terciary);
 }
 
-body.dark #btn-cancel {
+body.dark .btn-modal-cancel {
     color: var(--text-dark)
 }

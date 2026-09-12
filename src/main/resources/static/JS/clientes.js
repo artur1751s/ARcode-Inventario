@@ -1,22 +1,24 @@
 console.log("clientes.js cargado✅");
 
 document.addEventListener("click", (event) => {
-    const botonEditar = event.target.closest(".btn-editar");
-
-    if (botonEditar) {
-        const id = botonEditar.dataset.id;
-        abrirModalEditar(id);
-        return;
-    }
-
-    if (event.target.closest("#btn-close-modal")) {
-        cerrarModal();
-        return;
-    }
-
-    if (event.target.closest("#btn-cancel")) {
-        cerrarModal();
-        return;
+    if (event.target.closest("#module-clientes")) {
+        const botonEditar = event.target.closest(".btn-editar");
+    
+        if (botonEditar) {
+            const id = botonEditar.dataset.id;
+            abrirModalEditar(id);
+            return;
+        }
+    
+        if (event.target.closest("#btn-close-modal")) {
+            cerrarModal();
+            return;
+        }
+    
+        if (event.target.closest("#btn-cancel")) {
+            cerrarModal();
+            return;
+        }
     }
 });
 
