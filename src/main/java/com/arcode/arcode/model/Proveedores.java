@@ -29,5 +29,8 @@ public class Proveedores {
     private String empresa;
     @NotBlank(message = "!Debes de ingresar tu numero telefonico!")
     private String telefono;
+    @NotNull(message = "!Debes de ingresar tu identificacion!")
+    private Integer identificacion;
+    @NotBlank
     private String estado;
 }

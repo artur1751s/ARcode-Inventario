@@ -77,20 +77,20 @@
                     <input type="text" name="nombre" id="edit-name" required>
                     
                     <label for="edit-identification">Identificación</label>
-                    <input type="number" name="identificacion" id="edit-identification" required>
+                    <input type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="identificacion" id="edit-identification" required>
                     
                     <label for="edit-email">Correo</label>
                     <input type="email" name="correo" id="edit-email" required>
                     
                     <label for="edit-number">Teléfono</label>
-                    <input type="number" name="telefono" id="edit-number" required>
+                    <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="telefono" id="edit-number" required>
         
                     <label for="edit-address">Direccion</label>
                     <input type="text" name="direccion" id="edit-address" required>
                     
                     <div class="modal-btns">
                         <button type="submit" id="btn-save">Guardar cambios</button>
-                        <button type="button" id="btn-cancel">Cancelar</button>
+                        <button type="button" id="btn-cancel" class="btn-modal-cancel">Cancelar</button>
                     </div>
                 </form>
             </div>

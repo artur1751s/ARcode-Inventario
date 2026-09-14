@@ -92,19 +92,21 @@ function cerrarModal() {
 
 //Funcion boton de Deshabilitar/Habilitar Usuarios
 document.addEventListener("click", (event) => {
-    const btnEnable = event.target.closest(".user-enable");
-    const btnDisable = event.target.closest(".user-disable");
-
-    if (btnEnable) {
-        const id = btnEnable.dataset.id;
-        userEnable(id);
-        return;
-    }
+    if (event.target.closest("#module-clientes")) {
+        const btnEnable = event.target.closest(".user-enable");
+        const btnDisable = event.target.closest(".user-disable");
     
-    if (btnDisable) {
-        const id = btnDisable.dataset.id;
-        userDisable(id);
-        return;
+        if (btnEnable) {
+            const id = btnEnable.dataset.id;
+            userEnable(id);
+            return;
+        }
+        
+        if (btnDisable) {
+            const id = btnDisable.dataset.id;
+            userDisable(id);
+            return;
+        }
     }
 });
 

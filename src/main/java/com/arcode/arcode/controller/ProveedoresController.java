@@ -38,8 +38,26 @@ public class ProveedoresController {
 
     @PutMapping("/{id}")
     public Proveedores update(@PathVariable Long id, @RequestBody Proveedores proveedores) {
-        proveedores.setId_proveedor(id);
-        return proveedoresRepository.save(proveedores);
+        return proveedoresRepository.findById(id).map(proveedor -> {
+            proveedor.setNombre(proveedores.getNombre());
+            proveedor.setIdentificacion(proveedores.getIdentificacion());
+            proveedor.setCorreo(proveedores.getCorreo());
+            proveedor.setTelefono(proveedores.getTelefono());
+            proveedor.setEmpresa(proveedores.getEmpresa());
+            
+            return proveedoresRepository.save(proveedor);
+        })
+        .orElse(null);
+    }
+
+    @PutMapping("/{id}/estado")
+    public Proveedores actualizarEstado(@PathVariable Long id, @RequestBody String estado) {
+        return proveedoresRepository.findById(id).map(proveedor -> {
+            proveedor.setEstado(estado);
+            
+            return proveedoresRepository.save(proveedor);
+        })
+        .orElse(null);
     }
     
     @DeleteMapping("/{id}")
