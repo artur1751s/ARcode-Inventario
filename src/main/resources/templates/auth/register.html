@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/img/Logo ARcode.png"/>
-  <title>ARcode - Sign up</title>
-  <link rel="stylesheet" href="/CSS/Auth.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-
-<body>
-    <main>
-        <section class="card">
-            <img src="/img/Logo ARcode.png" alt="logo-ARcode">
-            <h1>Arcode</h1>
-            <h2>Crear Cuenta</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="/img/Logo ARcode.png"/>
+        <title>ARcode - Sign up</title>
+        <link rel="stylesheet" href="/CSS/Auth.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <main id="register">
+            <section class="card">
+                <img src="/img/Logo ARcode.png" alt="logo-ARcode">
+                <h1>Arcode</h1>
+                <h2>Crear Cuenta</h2>
             
-            <form id="form-cliente" class="form-grid" th:action="@{/clientes/save}" th:object="${clientes}" method="post">
-                <div class="form-group full">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre completo" required>
-                </div>
+                <form id="form-cliente" class="form-grid" th:action="@{/clientes/save}" th:object="${clientes}" method="post">
+                    <div class="form-group full">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" maxlength="100" id="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre completo" required>
+                    </div>
 
-                <div class="form-group full">
-                    <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña">
-                </div>
+                    <div class="form-group full">
+                        <label for="contrasena">Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" class="password-input" minlength="8" maxlength="12"  id="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña" required>
+                            <button type="button" class="btn-ver-password" aria-label="alternar ver contraseña"></button>
+                        </div>
+                    </div>
                 
-                <div class="form-group">
-                    <label for="documento">Documento</label>
-                    <input type="number" id="documento" th:field="*{identificacion}" placeholder="Ingrese su número de documento">
-                </div>
+                    <div class="form-group">
+                        <label for="documento">Documento</label>
+                        <input type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="documento" th:field="*{identificacion}" placeholder="Ingrese su número de documento">
+                    </div>
                 
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="number" id="telefono" th:field="*{telefono}" placeholder="Ingrese su teléfono">
-                </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="telefono" th:field="*{telefono}" placeholder="Ingrese su teléfono">
+                    </div>
                 
-                <div class="form-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" th:field="*{direccion}" placeholder="Ingrese su dirección">
-                </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" maxlength="2500" id="direccion" th:field="*{direccion}" placeholder="Ingrese su dirección">
+                    </div>
                 
-                <div class="form-group">
-                    <label for="emailCliente">Correo</label>
-                    <input type="email" id="emailCliente" th:field="*{correo}" placeholder="Ingrese su correo electrónico">
-                </div>
+                    <div class="form-group">
+                        <label for="emailCliente">Correo</label>
+                        <input type="email" maxlength="100" id="emailCliente" th:field="*{correo}" placeholder="Ingrese su correo electrónico">
+                    </div>
                 
-                <div class="actions">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="login" class="btn btn-secondary">Volver</a>
-                </div>
-            </form>
-        </section>
-    </main>
-</body>
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary" id="save">Guardar</button>
+                        <a href="login" class="btn btn-secondary">Volver</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <script type="module" src="/JS/auth.js"></script>
+    </body>
 </html>

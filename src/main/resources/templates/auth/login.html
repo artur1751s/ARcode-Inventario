@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/img/Logo ARcode.png"/>
-  <title>ARcode - Login</title>
-  <link rel="stylesheet" href="/CSS/Auth.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="/img/Logo ARcode.png"/>
+        <title>ARcode - Login</title>
+        <link rel="stylesheet" href="/CSS/Auth.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <main id="login">
+            <section class="card login-card">
+                <img src="/img/Logo ARcode.png" alt="logo-ARcode">
+                <h1>Arcode</h1>
+                <h2>Iniciar Sesion</h2>
+                <p>Usuario y contraseña demo: </p>
+                <p>admin@gmail.com</p>
+                <p>admin123</p>
+                
+                <form id="form-login">
+                    <label for="correo">Correo</label>
+                    <input type="email" maxlength="100" id="correo" placeholder="Ingrese su correo electrónico" required>
+                
+                    <label for="password">Contraseña</label>
+                    <div class="password-container">
+                        <input type="password" class="password-input" minlength="8" maxlength="12" id="password" placeholder="Ingrese su contraseña" required>
+                        <button type="button" class="btn-ver-password" aria-label="alternar ver contraseña"></button>
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary">Iniciar</button>
+                </form>
 
-<body>
-    <main>
-        <section class="card login-card">
-            <img src="/img/Logo ARcode.png" alt="logo-ARcode">
-            <h1>Arcode</h1>
-            <h2>Iniciar Sesion</h2>
-            
-            <form id="form-login">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" placeholder="Ingrese su correo electrónico">
-                
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" placeholder="Ingrese su contraseña">
-                
-                <button type="submit" class="btn btn-primary">Iniciar</button>
-            </form>
-  
-            <div class="links">
-                <a href="#">Recuperar Contraseña</a>
-                <a href="register">Registrarse</a>
-            </div>
-        </section>
-    </main>
-  <script type="module" src="/JS/auth.js"></script>
-</body>
+                <div class="links">
+                    <a href="#">Recuperar Contraseña</a>
+                    <a href="register">Registrarse</a>
+                </div>
+            </section>
+        </main>
+        <script type="module" src="/JS/auth.js"></script>
+    </body>
 </html>
