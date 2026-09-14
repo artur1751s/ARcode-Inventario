@@ -1,0 +1,155 @@
+<div id="module-proveedores">
+    <section class="section-header">
+        <h1>Proveedores</h1>
+        <button id="new-supplier">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+            </svg>
+            Añadir Nuevo
+        </button>
+    </section>
+    
+    <section>
+        <div class="search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+                <path d="M21 21l-6 -6"/>
+            </svg>
+            <input class="search-input" id="search-suppliers" type="text" placeholder="">
+            <label>Buscar Proveedores</label>
+        </div>
+
+        <div id="modal-proveedores-create" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Añadir Proveedor</h2>
+                    <button id="btn-close-modal-create" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-create-proveedor" class="form-grid" th:action="@{/proveedores/save}" th:object="${proveedor}" method="post">
+                    <div class="form-group full">
+                        <label for="create-proveedor">Nombre</label>
+                        <input type="text" maxlength="100" id="create-proveedor" th:field="*{nombre}" placeholder="Ingrese el nombre del proveedor" required>
+                    </div>
+                    
+                    <div class="form-group full">
+                        <label for="create-identification">Identificacion</label>
+                        <input type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="create-identification" th:field="*{identificacion}" placeholder="Ingrese la identificacion del proveedor">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-company">Empresa</label>
+                        <input type="text" maxlength="100" id="create-company" th:field="*{empresa}" placeholder="Ingrese la empresa proveedora">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-number">Telefono</label>
+                        <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="create-number" th:field="*{telefono}" placeholder="Ingrese el numero telefonico">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="create-email">Correo</label>
+                        <input type="email" maxlength="100" id="create-email" th:field="*{correo}" placeholder="Ingrese la categoria del producto">
+                    </div>
+                    
+                    <div class="modal-btns">
+                        <button type="submit">Guardar</button>
+                        <button type="button" id="btn-create-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="table-container">
+            <table>
+                <caption>Listado de proveedores registrados</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>IDENTIFICACION</th>
+                        <th>EMPRESA</th>
+                        <th>TELEFONO</th>
+                        <th>CORREO</th>
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="proveedor : ${proveedores}">
+                        <td th:text="${proveedor.id_proveedor}"></td>
+                        <td th:text="${proveedor.nombre}"></td>
+                        <td th:text="${proveedor.identificacion}"></td>
+                        <td th:text="${proveedor.empresa}"></td>
+                        <td th:text="${proveedor.telefono}"></td>
+                        <td th:text="${proveedor.correo}"></td>
+                        <td
+                            th:text="${proveedor.estado}"
+                            th:style="${proveedor.estado == 'SUSPENDIDO'} ? 'color: #ED6A5E;' : 'color: green;'">
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button
+                                    class="edit btn-editar"
+                                    th:data-id="${proveedor.id_proveedor}"
+                                    aria-label="Editar Proveedor">
+                                </button>
+                                <button
+                                    th:class="${proveedor.estado == 'SUSPENDIDO'} ? 'user-enable' : 'user-disable'"
+                                    th:data-id="${proveedor.id_proveedor}"
+                                    th:attr="aria-label=${proveedor.estado == 'SUSPENDIDO'} ? 'Habilitar Proveedor' : 'Deshabilitar Proveedor'">
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="modal-proveedores" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Editar Proveedor</h2>
+                    <button id="btn-close-modal" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-edit-proveedores">
+                    <input type="hidden" id="user-id">
+        
+                    <label for="edit-name">Nombre</label>
+                    <input type="text" name="nombre" id="edit-name" required>
+                    
+                    <label for="edit-identification">Identificación</label>
+                    <input type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="identificacion" id="edit-identification" required>
+                    
+                    <label for="edit-company">Empresa</label>
+                    <input type="text" name="empresa" id="edit-company" required>
+                    
+                    <label for="edit-number">Teléfono</label>
+                    <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="telefono" id="edit-number" required>
+        
+                    <label for="edit-email">Correo</label>
+                    <input type="email" name="correo" id="edit-email" required>
+                    
+                    <div class="modal-btns">
+                        <button type="submit" id="btn-save">Guardar cambios</button>
+                        <button type="button" id="btn-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

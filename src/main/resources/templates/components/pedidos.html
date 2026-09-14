@@ -1,0 +1,151 @@
+<div id="module-pedidos">
+    <section class="section-header">
+        <h1>Pedidos</h1>
+        <button id="new-order">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+            </svg>
+            Añadir Nuevo
+        </button>
+    </section>
+    
+    <section>
+        <div class="search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+                <path d="M21 21l-6 -6"/>
+            </svg>
+            <input class="search-input" id="search-orders" type="text" placeholder="">
+            <label for="search-orders">Buscar Pedidos</label>
+        </div>
+
+        <div id="modal-pedidos-create" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Añadir Pedido</h2>
+                    <button id="btn-close-modal-create" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-create-pedido" class="form-grid" th:action="@{/pedidos/save}" th:object="${pedido}" method="post">
+                    <div class="form-group">
+                        <label for="create-client">Cliente</label>
+                        <select name="id_cliente" id="create-client" required>
+                            <option value="" disabled selected>Selecciona un cliente</option>
+                            <option
+                                th:each="cliente : ${clientes}"
+                                th:value="${cliente.id_cliente}"
+                                th:text="|${cliente.id_cliente} - ${cliente.nombre}|">
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full">
+                        <label for="create-date">Fecha</label>
+                        <input type="date" id="create-date" th:field="*{fecha}" placeholder="Ingrese la fecha del pedido">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-order-status">Estado del pedido</label>
+                        <input type="text" id="create-order-status" th:field="*{estado_pedido}" placeholder="Ingrese el estado del pedido">
+                    </div>
+                    
+                    <div class="modal-btns">
+                        <button type="submit">Guardar</button>
+                        <button type="button" id="btn-create-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="table-container">
+            <table>
+                <caption>Listado de Pedidos</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CLIENTE</th>
+                        <th>FECHA</th>
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pedido : ${pedidos}">
+                        <td th:text="${pedido.id_pedido}"></td>
+                        <td>
+                            <span
+                                th:each="cliente : ${clientes}"
+                                th:if="${cliente.id_cliente == pedido.id_cliente}"
+                                th:text="${cliente.nombre}">
+                            </span>
+                        </td>
+                        <td th:text="${pedido.fecha}"></td>
+                        <td th:text="${pedido.estado_pedido}"></td>
+                        <td>
+                            <div class="actions">
+                                <button
+                                    class="edit btn-editar"
+                                    th:data-id="${pedido.id_pedido}"
+                                    th:data-cliente="${pedido.id_cliente}"
+                                    aria-label="Editar Pedido">
+                                </button>
+                                <form th:action="@{'/pedidos/delete/'+${pedido.id_pedido}}" method="post">
+                                    <button
+                                        class="delete"
+                                        aria-label="Eliminar Pedido">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="modal-pedidos" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Editar Producto</h2>
+                    <button id="btn-close-modal" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-edit-pedido" class="form-grid" th:action="@{/pedidos/save}" th:object="${pedido}" method="post">
+                    <input type="hidden" id="order-id">
+
+                    <label for="edit-client">Cliente</label>
+                    <select name="id_cliente" id="edit-client">
+                        <option
+                            th:each="cliente : ${clientes}"
+                            th:value="${cliente.id_cliente}"
+                            th:text="|${cliente.id_cliente} - ${cliente.nombre}|">
+                        </option>
+                    </select>
+                    
+                    <label for="edit-date">Fecha</label>
+                    <input type="date" id="edit-date" th:field="*{fecha}" placeholder="Ingrese la fecha del pedido">
+                
+                    <label for="edit-order-status">Estado del pedido</label>
+                    <input type="text" id="edit-order-status" th:field="*{estado_pedido}" placeholder="Ingrese el estado del pedido">
+                    
+                    <div class="modal-btns">
+                        <button type="submit">Guardar</button>
+                        <button type="button" id="btn-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

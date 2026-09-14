@@ -1,0 +1,183 @@
+<div id="module-inventario">
+    <section class="section-header">
+        <h1>Inventario</h1>
+        <button id="new-product">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14" /><path d="M5 12l14 0" />
+            </svg>
+            Añadir Nuevo
+        </button>
+
+    </section>
+    
+    <section>
+        <div class="search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+                <path d="M21 21l-6 -6"/>
+            </svg>
+            <input class="search-input" id="search-products" type="text" placeholder="">
+            <label for="search-products">Buscar Productos</label>
+        </div>
+
+        <div id="modal-inventario-create" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Añadir Producto</h2>
+                    <button id="btn-close-modal-create" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-create-producto" class="form-grid" th:action="@{/productos/save}" th:object="${producto}" method="post">
+                    <div class="form-group full">
+                        <label for="create-producto">Producto</label>
+                        <input type="text" maxlength="100" id="create-producto" th:field="*{nombre}" placeholder="Ingrese el producto para añadir" required>
+                    </div>
+                    
+                    <div class="form-group full">
+                        <label for="create-description">Descripcion</label>
+                        <input type="text" maxlength="255" id="create-description" th:field="*{descripcion}" placeholder="Ingrese una descripcion para el producto">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-price">Precio</label>
+                        <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="create-price" th:field="*{precio}" placeholder="Ingrese el precio del producto">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-stock">Stock</label>
+                        <input type="text" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" id="create-stock" th:field="*{stock}" placeholder="Ingrese el stock del producto">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="create-warehouse">Bodega</label>
+                        <select name="id_bodega" id="create-warehouse" required>
+                            <option value="" selected disabled>Selecciona una bodega</option>
+                            <option
+                                th:each="bodega : ${bodegas}"
+                                th:value="${bodega.id_bodega}"
+                                th:text="|${bodega.id_bodega} - ${bodega.nombre}|">
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="create-category">Categoria</label>
+                        <input type="text" maxlength="255" id="create-category" th:field="*{categoria}" placeholder="Ingrese la categoria del producto">
+                    </div>
+                    
+                    <div class="modal-btns">
+                        <button type="submit">Guardar</button>
+                        <button type="button" id="btn-create-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="table-container">
+            <table>
+                <caption>Listado de productos registrados</caption>
+                <thead>
+                    <tr>
+                        <th>ID</td>
+                        <th>PRODUCTO</td>
+                        <th>CATEGORIA</th>
+                        <th>DESCRIPCION</th>
+                        <th>STOCK</th>
+                        <th>PRECIO</th>
+                        <th>BODEGA</th>
+                        <th>VALOR TOTAL</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto : ${productos}">
+                        <td th:text="${producto.id_producto}"></td>
+                        <td th:text="${producto.nombre}"></td>
+                        <td th:text="${producto.categoria}"></td>
+                        <td th:text="${producto.descripcion}"></td>
+                        <td th:text="${producto.stock}"></td>
+                        <td th:text="'$'+${#numbers.formatDecimal(producto.precio, 0, 'POINT', 0, 'COMMA')}"></td>
+                        <td>
+                            <span
+                                th:each="bodega : ${bodegas}"
+                                th:if="${bodega.id_bodega == producto.id_bodega}"
+                                th:text="${bodega.nombre}">
+                            </span>
+                        </td>
+                        <td th:text="'$'+${#numbers.formatDecimal(producto.precio * producto.stock, 0, 'POINT', 0, 'COMMA')}"></td>
+                        <td>
+                            <div class="actions">
+                                <button
+                                    class="edit btn-editar"
+                                    th:data-id="${producto.id_producto}"
+                                    th:data-bodega="${producto.id_bodega}"
+                                    aria-label="Editar Producto">
+                                </button>
+                                <form th:action="@{'/productos/delete/'+${producto.id_producto}}" method="post">
+                                    <button
+                                        class="delete"
+                                        aria-label="Eliminar Producto">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div id="modal-inventario" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Editar Producto</h2>
+                    <button id="btn-close-modal" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-edit-inventario">
+                    <input type="hidden" id="product-id">
+        
+                    <label for="edit-product">Producto</label>
+                    <input type="text" maxlength="100" name="nombre" id="edit-product" required>
+                    
+                    <label for="edit-category">Categoria</label>
+                    <input type="text" maxlength="255" name="categoria" id="edit-category" required>
+    
+                    <label for="edit-description">Descripcion</label>
+                    <input type="text" maxlength="255" name="descripcion" id="edit-description" required>
+                    
+                    <label for="edit-stock">Stock</label>
+                    <input type="text" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="stock" id="edit-stock" required>
+                    
+                    <label for="edit-price">Precio</label>
+                    <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="precio" id="edit-price" required>
+                    
+                    <label for="edit-warehouse">Bodega</label>
+                    <select name="id_bodega" id="edit-warehouse" required>
+                        <option
+                            th:each="bodega : ${bodegas}"
+                            th:value="${bodega.id_bodega}"
+                            th:text="|${bodega.id_bodega} - ${bodega.nombre}|">
+                        </option>
+                    </select>
+    
+                    <div class="modal-btns">
+                        <button type="submit">Guardar cambios</button>
+                        <button type="button" id="btn-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

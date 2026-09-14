@@ -7,7 +7,6 @@
   --text-light: #1e293b;
   --text-muted-light: #475569;
   --border-light: #e2e8f0;
-  --border-light-alternative: #312e2e;
   --table-title-bg-light: #f8fafc;
   --table-content-bg-light: #ffffff;
 
@@ -415,12 +414,15 @@ body.dark table tbody tr {
 th,
 td {
   border: none;
-  padding: 10px 0 10px 25px;
+  padding: 10px 0 10px 15px;
   border-bottom: 2px solid var(--border-light);
 }
 
-tbody td:nth-child(1),
-tbody td:nth-child(2) {
+tbody td:nth-child(2),
+tbody td:nth-child(4),
+tbody td:nth-child(6),
+tbody td:nth-child(7) {
+  max-width: 150px;
   word-break: break-word;
 }
 
@@ -498,7 +500,7 @@ td .user-disable {
     box-shadow: none;
     transform: none;
     z-index: 0;
-}
+  }
   
   main {
     margin-left: 0;

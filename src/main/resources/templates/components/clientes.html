@@ -1,0 +1,99 @@
+<div id="module-clientes">
+    <h1>Clientes</h1>
+    
+    <section>
+        <div class="search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+                <path d="M21 21l-6 -6"/>
+            </svg>
+            <input class="search-input" id="search-clients" type="text" placeholder="">
+            <label for="search-clients">Buscar Clientes</label>
+        </div>
+    
+        <div class="table-container">
+            <table>
+                <caption>Listado de clientes registrados</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</tg>
+                        <th>IDENTIFICACION</th>
+                        <th>CORREO</th>
+                        <th>TELEFONO</th>
+                        <th>DIRECCION</th>
+                        <th>ESTADO</th>
+                        <th>ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.id_cliente}"></td>
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.identificacion}"></td>
+                        <td th:text="${cliente.correo}"></td>
+                        <td th:text="${cliente.telefono}"></td>
+                        <td th:text="${cliente.direccion}"></td>
+                        <td
+                            th:text="${cliente.estado}"
+                            th:style="${cliente.estado == 'SUSPENDIDO'} ? 'color: #ED6A5E;' : 'color: green;'">
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <button
+                                    class="edit btn-editar"
+                                    th:data-id="${cliente.id_cliente}"
+                                    aria-label="Editar Cliente">
+                                </button>
+                                <button
+                                    th:class="${cliente.estado == 'SUSPENDIDO'} ? 'user-enable' : 'user-disable'"
+                                    th:data-id="${cliente.id_cliente}"
+                                    th:attr="aria-label=${cliente.estado == 'SUSPENDIDO'} ? 'Habilitar Cliente' : 'Deshabilitar Cliente'">
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div id="modal-clientes" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>Editar Cliente</h2>
+                    <button id="btn-close-modal" class="btn-close-modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="form-edit-clientes">
+                    <input type="hidden" id="user-id">
+        
+                    <label for="edit-name">Nombre</label>
+                    <input type="text" name="nombre" id="edit-name" required>
+                    
+                    <label for="edit-identification">Identificación</label>
+                    <input type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="identificacion" id="edit-identification" required>
+                    
+                    <label for="edit-email">Correo</label>
+                    <input type="email" name="correo" id="edit-email" required>
+                    
+                    <label for="edit-number">Teléfono</label>
+                    <input type="text" maxlength="12" oninput="this.value = this.value.replace(/[^0-9]/g, '')" inputmode="numeric" name="telefono" id="edit-number" required>
+        
+                    <label for="edit-address">Direccion</label>
+                    <input type="text" name="direccion" id="edit-address" required>
+                    
+                    <div class="modal-btns">
+                        <button type="submit" id="btn-save">Guardar cambios</button>
+                        <button type="button" id="btn-cancel" class="btn-modal-cancel">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
