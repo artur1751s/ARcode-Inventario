@@ -52,6 +52,6 @@ public class ClientesView {
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         clientesRepository.deleteById(id);
         ra.addAttribute("message", "Cliente eliminado con exito");
-        return "redirect:/main/th/clientes";
+        return "redirect:/main/clientes";
     }
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -23,7 +24,7 @@ public class Pedidos {
     private Long id_pedido;
     
     private Long id_cliente; //llave foranea de bodega
-    @NotBlank(message = "!La fecha del pedido es obligatoria!")
+    @NotNull(message = "!La fecha del pedido es obligatoria!")
     private Date fecha;
     @NotBlank(message = "!Se debe ingresar en que estado se encuentra el pedido!")
     private String estado_pedido;

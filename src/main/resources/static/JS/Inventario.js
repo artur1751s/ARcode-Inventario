@@ -76,7 +76,7 @@ function abrirModalEditar(id) {
     document.getElementById("edit-description").value = celdas[3].textContent.trim();
     document.getElementById("edit-stock").value = celdas[4].textContent.trim();
     document.getElementById("edit-price").value = celdas[5].textContent.trim().replace(/[\$.]/g, "");
-    document.getElementById("warehouse").value = boton.dataset.bodega;
+    document.getElementById("edit-warehouse").value = boton.dataset.bodega;
 
     document.getElementById("modal-inventario").classList.add("activo");
 }

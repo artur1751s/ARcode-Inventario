@@ -36,7 +36,7 @@
                 </div>
                 <form id="form-create-producto" class="form-grid" th:action="@{/productos/save}" th:object="${producto}" method="post">
                     <div class="form-group full">
-                        <label for="producto">Producto</label>
+                        <label for="create-producto">Producto</label>
                         <input type="text" maxlength="100" id="create-producto" th:field="*{nombre}" placeholder="Ingrese el producto para añadir" required>
                     </div>
                     
@@ -52,16 +52,17 @@
                 
                     <div class="form-group">
                         <label for="create-stock">Stock</label>
-                        <input type="number" max="5" id="create-stock" th:field="*{stock}" placeholder="Ingrese el stock del producto">
+                        <input type="number" maxlength="5" id="create-stock" th:field="*{stock}" placeholder="Ingrese el stock del producto">
                     </div>
                 
                     <div class="form-group">
                         <label for="create-warehouse">Bodega</label>
-                        <select name="id_bodega" id="create-warehouse">
+                        <select name="id_bodega" id="create-warehouse" required>
+                            <option value="" selected disabled>Selecciona una bodega</option>
                             <option
                                 th:each="bodega : ${bodegas}"
                                 th:value="${bodega.id_bodega}"
-                                th:text="${bodega.nombre}">
+                                th:text="|${bodega.id_bodega} - ${bodega.nombre}|">
                             </option>
                         </select>
                     </div>
@@ -84,12 +85,13 @@
                 <caption>Listado de productos registrados</caption>
                 <thead>
                     <tr>
-                        <th>ID PRODUCTO</td>
+                        <th>ID</td>
                         <th>PRODUCTO</td>
                         <th>CATEGORIA</th>
                         <th>DESCRIPCION</th>
                         <th>STOCK</th>
                         <th>PRECIO</th>
+                        <th>BODEGA</th>
                         <th>VALOR TOTAL</th>
                         <th>ACCION</th>
                     </tr>
@@ -102,6 +104,13 @@
                         <td th:text="${producto.descripcion}"></td>
                         <td th:text="${producto.stock}"></td>
                         <td th:text="'$'+${#numbers.formatDecimal(producto.precio, 0, 'POINT', 0, 'COMMA')}"></td>
+                        <td>
+                            <span
+                                th:each="bodega : ${bodegas}"
+                                th:if="${bodega.id_bodega == producto.id_bodega}"
+                                th:text="${bodega.nombre}">
+                            </span>
+                        </td>
                         <td th:text="'$'+${#numbers.formatDecimal(producto.precio * producto.stock, 0, 'POINT', 0, 'COMMA')}"></td>
                         <td>
                             <div class="actions">
@@ -139,7 +148,7 @@
                 <form id="form-edit-inventario">
                     <input type="hidden" id="product-id">
         
-                    <labe for="edit-product">Producto</label>
+                    <label for="edit-product">Producto</label>
                     <input type="text" maxlength="100" name="nombre" id="edit-product" required>
                     
                     <label for="edit-category">Categoria</label>
@@ -149,13 +158,13 @@
                     <input type="text" maxlength="255" name="descripcion" id="edit-description" required>
                     
                     <label for="edit-stock">Stock</label>
-                    <input type="number" max="5" name="stock" id="edit-stock" required>
+                    <input type="number" name="stock" id="edit-stock" required>
                     
                     <label for="edit-price">Precio</label>
                     <input type="number" name="precio" id="edit-price" required>
                     
-                    <label for="warehouse">Bodega</label>
-                    <select name="id_bodega" id="warehouse">
+                    <label for="edit-warehouse">Bodega</label>
+                    <select name="id_bodega" id="edit-warehouse" required>
                         <option
                             th:each="bodega : ${bodegas}"
                             th:value="${bodega.id_bodega}"
